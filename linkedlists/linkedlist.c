@@ -230,10 +230,33 @@ void AddAfter(LinkedList* l, Node* n, int key) {
     n->next = new;
 }
 
-void print_list(LinkedList* l) {
+void Reverse(LinkedList* l) {
+    if (l->size == 0) return;
+
     Node* head = l->head;
     Node* tail = l->tail;
 
+    Node* prev = head->next;
+    Node* curr = prev->next;
+
+    Node* next;
+
+    tail->next = prev;
+    prev->next = tail;
+
+    while(curr != tail) {
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+
+    head->next = prev;
+}
+
+void print_list(LinkedList* l) {
+    Node* head = l->head;
+    Node* tail = l->tail;
     Node* curr = head->next;
 
     printf("[");
@@ -264,6 +287,14 @@ int main() {
     PushFront(l, 1);
     print_list(l);
 
+    printf("reverse\n");
+    Reverse(l);
+    print_list(l);
+
+    printf("reverse\n");
+    Reverse(l);
+    print_list(l);
+
     printf("push back 3\n");
     PushBack(l, 3);
     print_list(l);
@@ -284,6 +315,14 @@ int main() {
     PushBack(l, 4);
     print_list(l);
 
+    printf("reverse\n");
+    Reverse(l);
+    print_list(l);
+
+    printf("reverse\n");
+    Reverse(l);
+    print_list(l);
+
     printf("erase 3\n");
     Erase(l,3);
     print_list(l);
@@ -301,8 +340,24 @@ int main() {
     Erase(l,4);
     print_list(l);
 
+    printf("reverse\n");
+    Reverse(l);
+    print_list(l);
+
+    printf("reverse\n");
+    Reverse(l);
+    print_list(l);
+
     printf("erase 4\n");
     Erase(l,4);
+    print_list(l);
+
+    printf("reverse\n");
+    Reverse(l);
+    print_list(l);
+
+    printf("reverse\n");
+    Reverse(l);
     print_list(l);
 
     printf("empty? %d\n", Empty(l));

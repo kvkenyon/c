@@ -13,4 +13,5 @@ void Erase(LinkedList* l, int key);
 int Empty(LinkedList* l);
 void AddBefore(LinkedList* l, Node* n, int key);
 void AddAfter(LinkedList* l, Node* n, int key);
+void Reverse(LinkedList* l);
 void print_error(char msg[]);
