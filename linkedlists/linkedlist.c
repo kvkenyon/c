@@ -138,6 +138,8 @@ int PopBack(LinkedList* l) {
         curr = curr->next;
        }
 
+       l->size--;
+
        int ret = pop->key;
        free(pop);
 
@@ -147,7 +149,7 @@ int PopBack(LinkedList* l) {
     exit(-1);
 }
 
-int find(LinkedList* l, int key) {
+int Find(LinkedList* l, int key) {
     Node* head = l->head;
     Node* tail = l->tail;
 
@@ -163,6 +165,69 @@ int find(LinkedList* l, int key) {
         i++;
     }
     return -1;
+}
+
+void Erase(LinkedList* l, int key) {
+    if (l->size == 0) {
+        print_error("LinkedList is empty, can't Erase on empty list.");
+        return;
+    }
+
+    Node* head = l->head;
+    Node* tail = l->tail;
+
+    Node* curr = head->next;
+    Node* prev = head;
+
+    while (curr != tail) {
+        if (curr->key == key) {
+            // remove it
+            prev->next = curr->next;
+            if (curr->next == tail)
+                tail->next = prev;
+            l->size--;
+            free(curr);
+            break;
+        }
+
+        prev = curr;
+        curr = curr->next;
+    }
+}
+
+int Empty(LinkedList* l) {
+    return l->size == 0;
+}
+
+void AddBefore(LinkedList* l, Node* n, int key) {
+    Node* new = malloc(sizeof(Node));
+    new->key = key;
+
+    Node* head = l->head;
+    Node* tail = l->tail;
+
+    Node* curr = head->next;
+    Node* prev = head;
+    while (curr != tail) {
+        if (curr == n) {
+            prev->next = new;
+            new->next = curr;
+            break;
+        }
+        curr = curr->next;
+    }
+}
+
+void AddAfter(LinkedList* l, Node* n, int key) {
+    Node* new = malloc(sizeof(Node));
+    new->key = key;
+
+    if(n->next == l->tail) {
+        l->tail->next = new;
+    }
+
+    new->next = n->next;
+    n->next = new;
 }
 
 void print_list(LinkedList* l) {
@@ -209,10 +274,18 @@ int main() {
 
     printf("Front = %d\n", TopFront(l));
     printf("Back = %d\n", TopBack(l));
-    printf("Find index of key = 4: %d\n", find(l,4));
+    printf("Find index of key = 4: %d\n", Find(l,4));
 
     printf("push back 4\n");
     PushBack(l, 4);
+    print_list(l);
+
+    printf("push back 4\n");
+    PushBack(l, 4);
+    print_list(l);
+
+    printf("erase 3\n");
+    Erase(l,3);
     print_list(l);
 
     printf("pop back = %d\n", PopBack(l));
@@ -223,6 +296,16 @@ int main() {
 
     printf("pop front = %d\n", PopFront(l));
     print_list(l);
+
+    printf("erase 4\n");
+    Erase(l,4);
+    print_list(l);
+
+    printf("erase 4\n");
+    Erase(l,4);
+    print_list(l);
+
+    printf("empty? %d\n", Empty(l));
 
     LinkedList_Destroy(l);
 }
