@@ -1,3 +1,7 @@
+CC=gcc
+OBJ=vector.o
+LL_HEADER=./vector.h
+CFLAGS= -c -Wall
 
-makevector: vector.c
-	gcc -o vector_test vector.c -I.
+vector.o: vector.c $(LL_HEADER)
+	$(CC) $(CFLAGS) $< -o $@

@@ -1,3 +1,7 @@
+CC=gcc
+OBJ=linkedlist.o
+LL_HEADER=./linkedlist.h
+CFLAGS= -c -Wall
 
-make: linkedlist.c
-	gcc -o linkedlist_test linkedlist.c -I.
+linkedlist.o: linkedlist.c $(LL_HEADER)
+	$(CC) $(CFLAGS) $< -o $@

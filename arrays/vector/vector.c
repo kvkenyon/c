@@ -5,6 +5,8 @@
 const char OUT_OF_MEMORY[] = "Out of Memroy";
 const char OUT_OF_BOUNDS[] = "Array index out of bounds";
 
+const int DEFAULT_CAPACITY = 50;
+
 struct Vector {
     int* addr;
     int size;
@@ -104,50 +106,3 @@ void print_error(const char msg[]) {
     fprintf(stderr, "ERROR: %s\n", msg);
 }
 
-//
-// Main
-//
-
-int main() {
-    Vector* v = Vector_new();
-
-    for(int i = 0; i < 5; i++) {
-        Push_back(v, i);
-    }
-
-    print_vector(v);
-
-    Remove(v, Size(v) - 1);
-    print_vector(v);
-
-    Remove(v, 0);
-    print_vector(v);
-
-    Remove(v, 1);
-    print_vector(v);
-
-    Remove(v, 0);
-    print_vector(v);
-
-    Remove(v, 0);
-    print_vector(v);
-
-    Vector_destroy(v);
-
-    v = Vector_new();
-
-    for (int i = 0; i < 10; i++) {
-        Push_back(v,i);
-    }
-
-    print_vector(v);
-
-    printf("idx v[5] = %d\n", Get(v,5));
-    printf("setting v[5] to be 1000\n");
-    Set(v, 5, 1000);
-    printf("idx v[5] = %d\n", Get(v,5));
-
-    print_vector(v);
-
-    Vector_destroy(v);
-}

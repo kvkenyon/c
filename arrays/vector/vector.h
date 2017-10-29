@@ -1,7 +1,5 @@
 typedef struct Vector Vector;
 
-const int DEFAULT_CAPACITY = 50;
-
 Vector* Vector_new();
 void Vector_destroy(Vector* v);
 int Get(Vector* v, int i);

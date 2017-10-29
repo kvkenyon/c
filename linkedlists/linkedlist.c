@@ -73,7 +73,7 @@ void PushFront(LinkedList* l, int key) {
 int TopFront(LinkedList* l) {
     if (l->size > 0)
          return l->head->next->key;
-    print_error("LinkedList is empty, can't TopFront on empty list.");
+    print_error_ll("LinkedList is empty, can't TopFront on empty list.");
     exit(-1);
 }
 
@@ -93,7 +93,7 @@ int PopFront(LinkedList* l) {
         l->size--;
         return ret;
     }
-    print_error("LinkedList is empty, can't PopFront on empty list.");
+    print_error_ll("LinkedList is empty, can't PopFront on empty list.");
     exit(-1);
 }
 
@@ -116,7 +116,7 @@ int TopBack(LinkedList* l) {
     if (l->size > 0) {
         return l->tail->next->key;
     }
-    print_error("LinkedList is empty, can't TopBack on empty list.");
+    print_error_ll("LinkedList is empty, can't TopBack on empty list.");
     exit(-1);
 }
 
@@ -145,7 +145,7 @@ int PopBack(LinkedList* l) {
 
        return ret;
     }
-    print_error("LinkedList is empty, can't PopBack on empty list.");
+    print_error_ll("LinkedList is empty, can't PopBack on empty list.");
     exit(-1);
 }
 
@@ -169,7 +169,7 @@ int Find(LinkedList* l, int key) {
 
 void Erase(LinkedList* l, int key) {
     if (l->size == 0) {
-        print_error("LinkedList is empty, can't Erase on empty list.");
+        print_error_ll("LinkedList is empty, can't Erase on empty list.");
         return;
     }
 
@@ -269,99 +269,7 @@ void print_list(LinkedList* l) {
 }
 
 
-void print_error(char msg[]) {
+void print_error_ll(char msg[]) {
     printf("ERROR: %s\n", msg);
-}
-
-// ----
-// Main
-// ----
-int main() {
-    LinkedList* l = LinkedList_New();
-
-    printf("push front 2\n");
-    PushFront(l, 2);
-    print_list(l);
-
-    printf("push front 1\n");
-    PushFront(l, 1);
-    print_list(l);
-
-    printf("reverse\n");
-    Reverse(l);
-    print_list(l);
-
-    printf("reverse\n");
-    Reverse(l);
-    print_list(l);
-
-    printf("push back 3\n");
-    PushBack(l, 3);
-    print_list(l);
-
-    printf("push back 4\n");
-    PushBack(l, 4);
-    print_list(l);
-
-    printf("Front = %d\n", TopFront(l));
-    printf("Back = %d\n", TopBack(l));
-    printf("Find index of key = 4: %d\n", Find(l,4));
-
-    printf("push back 4\n");
-    PushBack(l, 4);
-    print_list(l);
-
-    printf("push back 4\n");
-    PushBack(l, 4);
-    print_list(l);
-
-    printf("reverse\n");
-    Reverse(l);
-    print_list(l);
-
-    printf("reverse\n");
-    Reverse(l);
-    print_list(l);
-
-    printf("erase 3\n");
-    Erase(l,3);
-    print_list(l);
-
-    printf("pop back = %d\n", PopBack(l));
-    print_list(l);
-
-    printf("pop front = %d\n", PopFront(l));
-    print_list(l);
-
-    printf("pop front = %d\n", PopFront(l));
-    print_list(l);
-
-    printf("erase 4\n");
-    Erase(l,4);
-    print_list(l);
-
-    printf("reverse\n");
-    Reverse(l);
-    print_list(l);
-
-    printf("reverse\n");
-    Reverse(l);
-    print_list(l);
-
-    printf("erase 4\n");
-    Erase(l,4);
-    print_list(l);
-
-    printf("reverse\n");
-    Reverse(l);
-    print_list(l);
-
-    printf("reverse\n");
-    Reverse(l);
-    print_list(l);
-
-    printf("empty? %d\n", Empty(l));
-
-    LinkedList_Destroy(l);
 }
 
