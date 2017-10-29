@@ -1,7 +1,7 @@
 CC=gcc
 OBJ=vector.o
-LL_HEADER=./vector.h
+HEADER=./vector.h
 CFLAGS= -c -Wall
 
-vector.o: vector.c $(LL_HEADER)
+vector.o: vector.c $(HEADER)
 	$(CC) $(CFLAGS) $< -o $@

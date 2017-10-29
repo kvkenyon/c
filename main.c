@@ -135,10 +135,26 @@ void test_linkedlist() {
     LinkedList_Destroy(l);
 }
 
+void test_queue() {
+    Queue* q = Queue_New();
+    for (int i = 0; i < 20; i++) {
+        Enqueue(q,i);
+    }
+
+    for (int i = 0; i < 20; i++) {
+        printf("Dequeue: %d\n", Dequeue(q));
+    }
+
+    printf("Queue empty? %d\n", EmptyQueue(q));
+
+    Queue_Destroy(q);
+}
+
 // ----
 // Main
 // ----
 int main() {
-    test_linkedlist();
-    test_vector();
+    //test_linkedlist();
+    //test_vector();
+    test_queue();
 }
