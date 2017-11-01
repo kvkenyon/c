@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "./linkedlists/linkedlist.h"
 #include "./queue/queue.h"
+#include "./queue/fixedqueue/fixed_queue.h"
 #include "./arrays/vector/vector.h"
 
 void test_vector() {
@@ -150,11 +151,32 @@ void test_queue() {
     Queue_Destroy(q);
 }
 
+void test_fixedqueue() {
+    FixedQueue* f = FixedQueue_New(20);
+
+    for (int i = 0; i < 20; i++) {
+        FQ_Enqueue(f,i);
+    }
+
+    printf("FQ_Full? %d\n", FQ_Full(f));
+
+    for (int i = 0; i < 20; i++) {
+        printf("FQ_Dequeue: %d\n", FQ_Dequeue(f));
+    }
+
+    printf("FQ empty? %d\n", FQ_Empty(f));
+
+    FixedQueue_Destroy(f);
+}
+
 // ----
 // Main
 // ----
 int main() {
     //test_linkedlist();
     //test_vector();
-    test_queue();
+    //test_queue();
+    test_fixedqueue();
 }
+
+// End main.c
