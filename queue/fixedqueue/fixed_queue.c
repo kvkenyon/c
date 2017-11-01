@@ -5,12 +5,16 @@
 struct FixedQueue {
     size_t size;
     int capacity;
+    int lru_idx;
+    int next_idx;
     int* arr;
 };
 
 FixedQueue* FixedQueue_New(size_t size) {
     FixedQueue* f = malloc(sizeof(FixedQueue));
     f->size = size;
+    f->lru_idx = size - 1;
+    f->next_idx = size - 1;
     f->arr = (int*) calloc(size, sizeof(int));
     return f;
 }
@@ -25,10 +29,16 @@ void FQ_Enqueue(FixedQueue* f, int val) {
         printf("ERROR: Queue is full. Cannot Enqueue element.");
         exit(-1);
     }
-    int idx = (f->size - f->capacity) - 1;
 
-    printf("Enqueue at: %d\n", idx);
-    *(f->arr + idx) = val;
+    if (f->next_idx < 0) {
+        f->next_idx = f->size-1;
+    }
+
+    printf("Enqueue at: %d\n", f->next_idx);
+
+    *(f->arr + f->next_idx) = val;
+
+    f->next_idx--;
     f->capacity++;
 }
 
@@ -37,12 +47,16 @@ int FQ_Dequeue(FixedQueue* f) {
         printf("ERROR: Queue is empty. Cannot Dequeue element.");
         exit(-1);
     }
-    int ret = *(f->arr + (f->size - 1));
-    int stop = (f->size - f->capacity);
-    for (int start = f->size - 1; start > stop; start--) {
-        *(f->arr + start) = *(f->arr + (start - 1));
+
+    if (f->lru_idx < 0) {
+        f->lru_idx = f->size - 1;
     }
+
+    int ret = *(f->arr + f->lru_idx);
+
+    f->lru_idx--;
     f->capacity--;
+
     return ret;
 }
 
